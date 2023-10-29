@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="registration.html">зарегистрироваться</a> <br>
+    <a href="voiti.html">войти</a> <br>
+
+    <button onclick="sendRequest3()">Look Photos</button>
+
+    <div id="div_image">
+
+    </div>
+
+    <script>
+        function sendRequest3() {
+            const url = 'https://api.example.com/data';
+            const headers = new Headers();
+            headers.append('password', '12345');
+
+            fetch("https://localhost:7277/ImagesLook/Look_Photo", 
+            {
+            method: 'Get',
+            headers: headers
+            })
+            .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json(); // Обработка ответа в формате JSON
+    })
+            .then(data => {
+                console.log(data);
+
+                const myDiv = document.getElementById('div_image');
+                for (let i = 0; i < data.length; i++) {
+                    console.log(data[i]);
+
+                    const imgElement = document.createElement('img');
+                    imgElement.src = data[i].photo; 
+
+                    myDiv.appendChild(imgElement);
+                }
+            })
+            .catch(error => {
+                console.log('There was a problem with the fetch operation:', error);
+            });   
+        }
+    </script>
+</body>
+</html>

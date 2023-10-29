@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" placeholder="email" id="email"> <br>
+    <input type="text" placeholder="password" id="password"> <br>
+    <input type="text" placeholder="repeat password" id="repeat_password"> <br>
+
+    <button onclick="sendRequest2()">OK</button>
+
+    <script>
+        function sendRequest2() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const repeat_password = document.getElementById('repeat_password').value;
+
+    fetch(`https://localhost:7277/regiz?email=${email}&password=${email}&repeat_password=${repeat_password}`, 
+    {
+    method: 'POST'
+    })
+        .then(data => {
+            console.log(data); // Делайте что-то с полученными данными
+        })
+        .catch(error => {
+            console.log('There was a problem with the fetch operation:', error);
+        });
+    }
+    </script>   
+</body>
+</html>
